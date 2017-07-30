@@ -16,6 +16,12 @@ To generate jsdoc, put the cursor in a line containing a function declaration, t
     
 It will parses the function's declaration and extract the name and parameters of the function
 
+You could also add a shortcut to generate doc quickly
+
+    hook global WinSetOption filetype=javascript %{
+      map global user d ':jsdoc<ret>' -docstring "Generate jsdoc"
+    }
+
 # Limitation
 
 For the moment it only works for function declaration 
