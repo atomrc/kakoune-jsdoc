@@ -24,4 +24,5 @@ You could also add a shortcut to generate doc quickly
 
 # Limitation
 
-For the moment it only works for function declaration 
+- it only works for function declaration 
+- it's having some hard times with destructured objects as function parameters
