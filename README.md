@@ -2,6 +2,8 @@
 
 Helps you generate JSDoc from [kakoune](http://kakoune.org)
 
+![jsdoc generator demo](/screenshots/demo.gif)
+
 # Install
 
 Copy the `jsdoc.kak` file in your `~/.config/kak/autoload/` folder.
