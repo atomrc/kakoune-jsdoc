@@ -4,10 +4,7 @@ def jsdoc %{
     exec 'x'
     try %{
         # select the function's name
-        exec 's(?<=function )\s*\w+'
-
-        # seems to be a bug, I cannot add the <ret> in the previous exec, it pops a parsing error
-        exec '<ret>'
+        exec 's(?<lt>=function )\s*\w+<ret>'
 
         # copy function's name to register a
         exec '"ay'
