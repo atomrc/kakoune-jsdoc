@@ -27,6 +27,9 @@ def jsdoc %{
             echo "jsdoc Error: couldn't parse function declaration"
         }
         exec 'O* @return {type}<ret>*/<esc>'
+
+        # align doc comment with function
+        exec '<a-/>\/\*\*<ret>?\*\/<ret>J<a-s><a-&><space>'
     } catch %{
         echo "jsdoc Error: no function declaration found"
     }
