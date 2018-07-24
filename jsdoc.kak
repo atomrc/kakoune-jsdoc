@@ -1,35 +1,28 @@
 def jsdoc %{
-    # select the whole line (a better pattern might be to
-    # select until the first opening { //}
-    exec 'x'
     try %{
-        # select the function's name
-        exec 's(?<lt>=function )\s*\w+<ret>'
-
-        # copy function's name to register a
-        exec '"ay'
-
-        # start writing the doc and add the function's name
-        exec -draft -itersel 'O/**<ret> * |<esc>"aR'
+        # start writing the doc
+        exec -draft 'O/**<ret> *<esc>'
         try %{
-            # again, select the whole line
-            exec 'x'
+            # selects all the parameters
+            exec 'ghf(m'
 
             # split every parameters
-            exec 's\w+(?=[,)])<ret>'
+            exec 's\w+<ret>'
 
             # write the doc for every single parameter
-            exec -draft -itersel '"ayO* @param {type} |<esc>"aR'
+            exec -draft -itersel '"ayO* @param {type} |<esc>h"aR'
 
             # remove multi selection
             exec '<space>'
         } catch %{
             echo "jsdoc Error: couldn't parse function declaration"
         }
-        exec 'O* @return {type}<ret>*/<esc>'
+        exec 'O* @returns {type}<ret>*/<esc>'
 
-        # align doc comment with function
-        exec '<a-/>\/\*\*<ret>?\*\/<ret>J<a-s><a-&><space>'
+        # align doc comment with function.
+        # selects the jsdoc comment and the first line of the function
+        # and applies the indentation to the selection.
+        exec '<a-/>/\*\*<ret>?\*/<ret>J<a-s><a-&><space>'
     } catch %{
         echo "jsdoc Error: no function declaration found"
     }
